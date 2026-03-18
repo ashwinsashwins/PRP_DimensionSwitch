@@ -1,3 +1,8 @@
-
-
 I wonder if I can add links/embed figures directly to the text....
+
+
+All decoding models had the following structure:
+correctDecodingProbability~SESSION*NUMTASK*SOA +(1|SUBID_S)
+grouped by individual trial, averaged across:
+  - mean RT_1 (sessions 2,3,6) is 777.6 --> time (index) = 50-244
+  - mean RT_2 (sessions 2,3,6) is 830.7 --> time (index) = 125-332 (but time index only goes to 301)
