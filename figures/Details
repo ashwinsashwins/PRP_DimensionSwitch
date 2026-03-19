@@ -9,7 +9,7 @@ grouped by individual trial, averaged across:
 
 
 RSA models had the following structure:
-RelevantFeatureValueSESSION*NUMTASK*SOA +(1+ SESSION|SUBID)
+RelevantFeatureValue~SESSION*NUMTASK*SOA +(1+ SESSION|SUBID)
 grouped by individual trial, averaged across:
   - S1ID: t= 10-694ms
   - S2ID: t= 10-790ms
