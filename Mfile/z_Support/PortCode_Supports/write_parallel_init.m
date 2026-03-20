@@ -1,0 +1,1 @@
+write_parallel(890,bitset(uint8(read_parallel(890)),6,0));

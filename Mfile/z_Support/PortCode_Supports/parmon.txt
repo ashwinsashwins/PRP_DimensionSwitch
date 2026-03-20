@@ -1,0 +1,98 @@
+Parallel Port Monitor
+(c) 1997-2002 Fred Bulback
+email: fred@geekhideout.com
+url: http://www.geekhideout.com
+
+************************************************
+*
+* This program is freeware.  It may be freely
+* distributed provided:
+*
+*  1)  There is no accompanying fee of any sort.
+*  2)  The executable file has not been modified
+*      in any way.
+*  3)  This file, "parmon.txt", accompanies the
+*      executable.
+*
+************************************************
+
+Parallel Port Monitor is a utility for windows 95/98/NT
+that permits the three registers of the parallel port to 
+be spied upon.
+
+FAQ
+
+Q: How do I change which parallel port is being spied
+   upon?
+A: Click on any cell in the port column.  If there is 
+   more than one port, the next one will be selected.
+
+Q:  How do I edit the values ports values?
+A:  Simply click on the cell that you wish to edit and
+    type the new value.  Press <ENTER> when you are done,
+    or <ESC> to cancel the edit.  Some registers cannot
+    be edited and therefore will not change.
+
+Q:  What's the "Beep" column all about?
+A:  You can toggle each beep cell between "Yes" and "No".
+    When the cell is yes, a beep will sound when the
+    corresponding register changes.  If for some reason
+    you want to toggle all cells, just click on the
+    column title.
+
+Q:  Is there a way to toggle individual bits?
+A:  All of the output bits may be toggled by clicking on
+    the appropriate pin on the connector diagram. 
+    Obviously, input pins cannot be toggled.
+
+Q:  What's the deal with the female/male connector box?
+A:  Suppose you have a cable in front of you.  By 
+    selecting female/male, you can easily match up the
+    pins to those in the connector diagram.
+
+Q:  On the connector, some pins are green while others
+    are red.  What's the difference?
+A:  Green pins are low, red pins are high.  This can
+    be changed to whatever you want, however.
+
+Q:  What does "Always on top" do.
+A:  Since this program *is* a monitor program, chances
+    are you want to see what it's doing.  By checking 
+    this box, the program will always be visible.
+
+Q:  Why would I want to disable the connector?
+A:  If your system is particularly slow, you may find
+    that it flickers when it is updated, which can be
+    annoying.
+
+Q:  What does sample rate do?
+A:  Sample rate determines how often the state of the
+    port is sampled?  It defaults to "as fast as 
+    possible".  You may find, however, that this will
+    slow your machine down too much.
+
+Q:  What about the blink on sample box?
+A:  When this box is checked, a small indicator will
+    appear to the lower left of the connector.  Every
+    time a sample is taken, it will blink to a different
+    color.  This is useful if your sample rate is fairly
+    long.  With a short sample rate, checking this box
+    can have detrimental effects.
+
+And the most frequently asked question:
+
+Q:  Can you change Parallel Port Monitor so it logs the
+    data?
+A:  Yes I could, but I'm not going to.  The reason for 
+    this is that the program works by taking periodic
+    samples of the state of the parallel port.  
+    Therefore all state changes between samples are 
+    not even noticed.  While this is ok for viewing
+    with the eye, it is rather lousy for logging because
+    a lot of information will be missing from the log
+    potentially causing confusion.
+
+--------------------------------------------------------
+I welcome all comments and suggestions:  
+
+fred@geekhideout.com

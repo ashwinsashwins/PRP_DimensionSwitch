@@ -1,0 +1,8 @@
+bit0(=1)left button, mouse 1
+bit1(=2)right button, mouse 1
+bit2(=4)left button, mouse 2
+bit3(=8)right button, mouse 2
+.
+.
+.
+bit6(=64)scanner sync pulse (duration: 100msec)
