@@ -1,0 +1,41 @@
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: get(dv) ~ SESSION * NUMTASK * SOA + (1 + SESSION | SUBID)
+   Data: dsM
+Control: lmerControl(optimizer = "bobyqa")
+
+REML criterion at convergence: 411800.9
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-5.9113 -0.6233 -0.0020  0.6278  6.2081 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr       
+ SUBID    (Intercept) 0.001264 0.03556             
+          SESSION.L   0.004459 0.06678  -0.18      
+          SESSION.Q   0.001468 0.03832   0.03 -0.33
+ Residual             1.293415 1.13728             
+Number of obs: 132975, groups:  SUBID, 24
+
+Fixed effects:
+                                Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)                    1.635e-01  9.291e-03  4.332e+01  17.598  < 2e-16 ***
+SESSION.L                     -3.825e-02  1.690e-02  4.003e+01  -2.264  0.02908 *  
+SESSION.Q                      2.426e-02  1.278e-02  7.481e+01   1.899  0.06148 .  
+NUMTASKdouble                 -1.308e-01  6.902e-03  1.325e+05 -18.945  < 2e-16 ***
+SOA.L                         -3.191e-02  1.319e-02  1.329e+05  -2.419  0.01556 *  
+SOA.Q                         -1.355e-02  1.305e-02  1.329e+05  -1.038  0.29916    
+SESSION.L:NUMTASKdouble        5.268e-02  1.191e-02  1.326e+05   4.422 9.77e-06 ***
+SESSION.Q:NUMTASKdouble       -2.905e-02  1.200e-02  1.303e+05  -2.422  0.01543 *  
+SESSION.L:SOA.L                2.027e-03  2.274e-02  1.329e+05   0.089  0.92896    
+SESSION.Q:SOA.L                4.873e-02  2.296e-02  1.329e+05   2.123  0.03378 *  
+SESSION.L:SOA.Q                3.467e-02  2.252e-02  1.329e+05   1.540  0.12356    
+SESSION.Q:SOA.Q                1.514e-02  2.270e-02  1.329e+05   0.667  0.50488    
+NUMTASKdouble:SOA.L            4.188e-02  1.568e-02  1.329e+05   2.671  0.00755 ** 
+NUMTASKdouble:SOA.Q            3.034e-03  1.552e-02  1.329e+05   0.195  0.84502    
+SESSION.L:NUMTASKdouble:SOA.L -7.186e-03  2.707e-02  1.329e+05  -0.265  0.79065    
+SESSION.Q:NUMTASKdouble:SOA.L -8.234e-02  2.723e-02  1.329e+05  -3.024  0.00250 ** 
+SESSION.L:NUMTASKdouble:SOA.Q -3.670e-02  2.681e-02  1.329e+05  -1.369  0.17103    
+SESSION.Q:NUMTASKdouble:SOA.Q -2.542e-02  2.696e-02  1.329e+05  -0.943  0.34582    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
