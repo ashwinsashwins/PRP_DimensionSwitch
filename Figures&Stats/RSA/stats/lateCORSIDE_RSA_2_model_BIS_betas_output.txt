@@ -3,40 +3,40 @@ Formula: get(dv) ~ SESSION * NUMTASK * SOA + (1 + SESSION | SUBID)
    Data: dsM
 Control: lmerControl(optimizer = "bobyqa")
 
-REML criterion at convergence: 492559.9
+REML criterion at convergence: 528365
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--6.4397 -0.6149  0.0009  0.6094  6.7216 
+-5.8766 -0.6191 -0.0015  0.6146  6.9703 
 
 Random effects:
- Groups   Name        Variance  Std.Dev. Corr     
- SUBID    (Intercept) 0.0326259 0.18063           
-          SESSION.L   0.0024267 0.04926  0.79     
-          SESSION.Q   0.0002797 0.01672  0.40 0.88
- Residual             2.5006746 1.58135           
-Number of obs: 131138, groups:  SUBID, 24
+ Groups   Name        Variance  Std.Dev. Corr       
+ SUBID    (Intercept) 0.0364677 0.19097             
+          SESSION.L   0.0032461 0.05697   0.63      
+          SESSION.Q   0.0006744 0.02597  -0.13  0.69
+ Residual             3.2859987 1.81273             
+Number of obs: 131136, groups:  SUBID, 24
 
 Fixed effects:
                                 Estimate Std. Error         df t value Pr(>|t|)    
-(Intercept)                    1.480e-01  3.775e-02  2.469e+01   3.920 0.000620 ***
-SESSION.L                     -7.362e-05  1.723e-02  8.649e+01  -0.004 0.996600    
-SESSION.Q                     -1.967e-02  1.453e-02  5.578e+02  -1.353 0.176447    
-NUMTASKdouble                 -5.639e-05  9.659e-03  1.304e+05  -0.006 0.995342    
-SOA.L                          1.511e-01  1.851e-02  1.311e+05   8.163 3.30e-16 ***
-SOA.Q                         -6.828e-02  1.830e-02  1.311e+05  -3.731 0.000191 ***
-SESSION.L:NUMTASKdouble        9.045e-02  1.667e-02  1.290e+05   5.426 5.78e-08 ***
-SESSION.Q:NUMTASKdouble        1.845e-02  1.677e-02  1.282e+05   1.100 0.271256    
-SESSION.L:SOA.L                2.768e-03  3.191e-02  1.310e+05   0.087 0.930883    
-SESSION.Q:SOA.L                3.550e-03  3.219e-02  1.310e+05   0.110 0.912193    
-SESSION.L:SOA.Q                4.452e-02  3.158e-02  1.311e+05   1.410 0.158541    
-SESSION.Q:SOA.Q               -6.494e-02  3.182e-02  1.311e+05  -2.041 0.041256 *  
-NUMTASKdouble:SOA.L            2.922e-02  2.200e-02  1.311e+05   1.328 0.184087    
-NUMTASKdouble:SOA.Q            5.892e-02  2.175e-02  1.311e+05   2.709 0.006759 ** 
-SESSION.L:NUMTASKdouble:SOA.L  2.116e-02  3.799e-02  1.311e+05   0.557 0.577563    
-SESSION.Q:NUMTASKdouble:SOA.L -1.881e-02  3.820e-02  1.311e+05  -0.493 0.622355    
-SESSION.L:NUMTASKdouble:SOA.Q -6.437e-02  3.759e-02  1.311e+05  -1.713 0.086789 .  
-SESSION.Q:NUMTASKdouble:SOA.Q  6.464e-02  3.778e-02  1.311e+05   1.711 0.087053 .  
+(Intercept)                    1.684e-01  4.008e-02  2.498e+01   4.201 0.000296 ***
+SESSION.L                     -2.661e-03  1.981e-02  8.402e+01  -0.134 0.893449    
+SESSION.Q                     -2.811e-02  1.705e-02  3.350e+02  -1.649 0.100067    
+NUMTASKdouble                  1.331e-04  1.107e-02  1.308e+05   0.012 0.990408    
+SOA.L                          1.642e-01  2.122e-02  1.311e+05   7.738 1.02e-14 ***
+SOA.Q                         -8.919e-02  2.098e-02  1.311e+05  -4.251 2.13e-05 ***
+SESSION.L:NUMTASKdouble        9.918e-02  1.911e-02  1.297e+05   5.190 2.11e-07 ***
+SESSION.Q:NUMTASKdouble        2.464e-02  1.923e-02  1.286e+05   1.281 0.200216    
+SESSION.L:SOA.L                8.521e-03  3.658e-02  1.310e+05   0.233 0.815817    
+SESSION.Q:SOA.L                7.569e-03  3.690e-02  1.310e+05   0.205 0.837488    
+SESSION.L:SOA.Q                7.123e-02  3.620e-02  1.311e+05   1.968 0.049081 *  
+SESSION.Q:SOA.Q               -8.278e-02  3.648e-02  1.311e+05  -2.270 0.023236 *  
+NUMTASKdouble:SOA.L            2.420e-02  2.521e-02  1.311e+05   0.960 0.337148    
+NUMTASKdouble:SOA.Q            7.505e-02  2.494e-02  1.311e+05   3.009 0.002617 ** 
+SESSION.L:NUMTASKdouble:SOA.L  1.869e-02  4.355e-02  1.311e+05   0.429 0.667846    
+SESSION.Q:NUMTASKdouble:SOA.L -2.084e-02  4.379e-02  1.311e+05  -0.476 0.634186    
+SESSION.L:NUMTASKdouble:SOA.Q -8.723e-02  4.309e-02  1.311e+05  -2.024 0.042926 *  
+SESSION.Q:NUMTASKdouble:SOA.Q  8.944e-02  4.330e-02  1.311e+05   2.065 0.038897 *  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 optimizer (bobyqa) convergence code: 0 (OK)

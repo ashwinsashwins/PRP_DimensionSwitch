@@ -3,39 +3,39 @@ Formula: get(dv) ~ SESSION * NUMTASK * SOA + (1 + SESSION | SUBID)
    Data: dsM
 Control: lmerControl(optimizer = "bobyqa")
 
-REML criterion at convergence: 376289.3
+REML criterion at convergence: 405529.5
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--6.7037 -0.6311  0.0003  0.6240  6.1595 
+-5.9651 -0.6291  0.0019  0.6287  5.8936 
 
 Random effects:
  Groups   Name        Variance Std.Dev. Corr     
- SUBID    (Intercept) 0.001017 0.03188           
-          SESSION.L   0.002057 0.04536  0.17     
-          SESSION.Q   0.001613 0.04017  0.32 0.69
- Residual             1.030363 1.01507           
-Number of obs: 131138, groups:  SUBID, 24
+ SUBID    (Intercept) 0.001247 0.03532           
+          SESSION.L   0.002559 0.05059  0.06     
+          SESSION.Q   0.002432 0.04931  0.13 0.66
+ Residual             1.287790 1.13481           
+Number of obs: 131136, groups:  SUBID, 24
 
 Fixed effects:
                                 Estimate Std. Error         df t value Pr(>|t|)    
-(Intercept)                    1.515e-01  8.341e-03  4.398e+01  18.159  < 2e-16 ***
-SESSION.L                     -2.649e-02  1.290e-02  5.332e+01  -2.054   0.0449 *  
-SESSION.Q                      7.682e-03  1.224e-02  6.153e+01   0.628   0.5325    
-NUMTASKdouble                 -9.189e-02  6.205e-03  1.298e+05 -14.810  < 2e-16 ***
-SOA.L                         -5.238e-03  1.188e-02  1.311e+05  -0.441   0.6593    
-SOA.Q                         -2.259e-02  1.175e-02  1.311e+05  -1.922   0.0545 .  
-SESSION.L:NUMTASKdouble        5.458e-02  1.071e-02  1.296e+05   5.097 3.46e-07 ***
-SESSION.Q:NUMTASKdouble       -4.432e-03  1.078e-02  1.262e+05  -0.411   0.6810    
-SESSION.L:SOA.L                1.569e-02  2.049e-02  1.311e+05   0.766   0.4437    
-SESSION.Q:SOA.L                1.331e-02  2.067e-02  1.310e+05   0.644   0.5197    
-SESSION.L:SOA.Q                4.746e-02  2.027e-02  1.311e+05   2.342   0.0192 *  
-SESSION.Q:SOA.Q               -2.315e-02  2.043e-02  1.311e+05  -1.133   0.2571    
-NUMTASKdouble:SOA.L            2.915e-02  1.412e-02  1.311e+05   2.064   0.0390 *  
-NUMTASKdouble:SOA.Q            1.523e-02  1.396e-02  1.311e+05   1.090   0.2755    
-SESSION.L:NUMTASKdouble:SOA.L -2.273e-02  2.439e-02  1.311e+05  -0.932   0.3513    
-SESSION.Q:NUMTASKdouble:SOA.L  2.842e-03  2.452e-02  1.311e+05   0.116   0.9077    
-SESSION.L:NUMTASKdouble:SOA.Q -4.234e-02  2.413e-02  1.311e+05  -1.755   0.0793 .  
-SESSION.Q:NUMTASKdouble:SOA.Q  1.722e-02  2.425e-02  1.311e+05   0.710   0.4776    
+(Intercept)                    1.495e-01  9.274e-03  4.443e+01  16.125  < 2e-16 ***
+SESSION.L                     -3.086e-02  1.440e-02  5.342e+01  -2.142   0.0367 *  
+SESSION.Q                      7.685e-03  1.430e-02  5.460e+01   0.537   0.5932    
+NUMTASKdouble                 -8.747e-02  6.938e-03  1.301e+05 -12.608  < 2e-16 ***
+SOA.L                          6.205e-03  1.328e-02  1.311e+05   0.467   0.6405    
+SOA.Q                         -1.938e-02  1.313e-02  1.311e+05  -1.476   0.1401    
+SESSION.L:NUMTASKdouble        6.042e-02  1.197e-02  1.297e+05   5.047  4.5e-07 ***
+SESSION.Q:NUMTASKdouble        4.413e-04  1.206e-02  1.280e+05   0.037   0.9708    
+SESSION.L:SOA.L                2.813e-02  2.291e-02  1.311e+05   1.228   0.2193    
+SESSION.Q:SOA.L                1.249e-02  2.311e-02  1.310e+05   0.541   0.5888    
+SESSION.L:SOA.Q                6.305e-02  2.266e-02  1.311e+05   2.782   0.0054 ** 
+SESSION.Q:SOA.Q               -3.845e-02  2.284e-02  1.311e+05  -1.683   0.0923 .  
+NUMTASKdouble:SOA.L            1.885e-02  1.579e-02  1.311e+05   1.194   0.2324    
+NUMTASKdouble:SOA.Q            9.437e-03  1.561e-02  1.311e+05   0.604   0.5456    
+SESSION.L:NUMTASKdouble:SOA.L -3.640e-02  2.727e-02  1.311e+05  -1.335   0.1819    
+SESSION.Q:NUMTASKdouble:SOA.L -6.793e-03  2.741e-02  1.311e+05  -0.248   0.8043    
+SESSION.L:NUMTASKdouble:SOA.Q -6.318e-02  2.697e-02  1.311e+05  -2.342   0.0192 *  
+SESSION.Q:NUMTASKdouble:SOA.Q  3.629e-02  2.711e-02  1.311e+05   1.338   0.1807    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
