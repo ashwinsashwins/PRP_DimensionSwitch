@@ -1,0 +1,39 @@
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: RT_2 ~ SESSION * NUMTASK + (1 + SESSION * NUMTASK | SUBID_S)
+   Data: ds_1000
+
+REML criterion at convergence: 399100
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.3192 -0.4624 -0.1392  0.2173 11.0114 
+
+Random effects:
+ Groups   Name                    Variance Std.Dev. Corr                         
+ SUBID_S  (Intercept)                11.46   3.386                               
+          SESSION.L                2902.45  53.874   0.29                        
+          SESSION.Q                5528.41  74.353   0.45 -0.43                  
+          NUMTASKdouble            2082.50  45.634  -0.20 -0.44 -0.19            
+          SESSION.L:NUMTASKdouble 14221.77 119.255   0.39  0.71  0.01 -0.72      
+          SESSION.Q:NUMTASKdouble 12170.75 110.321   0.32 -0.54  0.67 -0.01 -0.38
+ Residual                         56188.55 237.041                               
+Number of obs: 28949, groups:  SUBID_S, 72
+
+Fixed effects:
+                         Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)              485.1739     6.7827   62.3303  71.532  < 2e-16 ***
+SESSION.L                -33.3264    11.1128   41.5866  -2.999  0.00456 ** 
+SESSION.Q                 -0.9787    12.3504   38.0593  -0.079  0.93725    
+NUMTASKdouble            195.3084    12.6780   51.0332  15.405  < 2e-16 ***
+SESSION.L:NUMTASKdouble -164.9277    22.2230   30.7086  -7.421 2.47e-08 ***
+SESSION.Q:NUMTASKdouble    9.7401    21.6915   44.3936   0.449  0.65560    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SESSION.L SESSION.Q NUMTAS SESSION.L:
+SESSION.L   -0.246                                      
+SESSION.Q   -0.142 -0.165                               
+NUMTASKdobl  0.460 -0.214    -0.082                     
+SESSION.L:N -0.200  0.416    -0.135    -0.587           
+SESSION.Q:N -0.087 -0.153     0.501     0.035 -0.420    

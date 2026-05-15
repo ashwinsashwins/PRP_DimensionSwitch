@@ -1,0 +1,34 @@
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: RT_2 ~ SESSION * NUMTASK + (1 | SUBID_S)
+   Data: ds_750
+
+REML criterion at convergence: 402000.4
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.0890 -0.5189 -0.1583  0.2812 10.4739 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ SUBID_S  (Intercept) 16529    128.6   
+ Residual             71953    268.2   
+Number of obs: 28650, groups:  SUBID_S, 72
+
+Fixed effects:
+                          Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)               504.1174    15.4320    72.5653  32.667   <2e-16 ***
+SESSION.L                 -38.3859    26.7276    72.5498  -1.436    0.155    
+SESSION.Q                   0.7549    26.7304    72.5809   0.028    0.978    
+NUMTASKdouble             251.5336     3.4940 28580.5757  71.990   <2e-16 ***
+SESSION.L:NUMTASKdouble  -189.6846     6.0543 28579.9952 -31.331   <2e-16 ***
+SESSION.Q:NUMTASKdouble     0.7378     6.0493 28581.1546   0.122    0.903    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SESSION.L SESSION.Q NUMTAS SESSION.L:
+SESSION.L   -0.001                                      
+SESSION.Q    0.000  0.000                               
+NUMTASKdobl -0.159  0.002     0.001                     
+SESSION.L:N  0.002 -0.158     0.002    -0.036           
+SESSION.Q:N  0.001  0.002    -0.160     0.001 -0.025    

@@ -1,0 +1,39 @@
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: RT_2 ~ SESSION * NUMTASK + (1 + SESSION * NUMTASK | SUBID_S)
+   Data: ds_100
+
+REML criterion at convergence: 350493
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.5191 -0.5729 -0.1483  0.4621  6.5091 
+
+Random effects:
+ Groups   Name                    Variance Std.Dev. Corr                         
+ SUBID_S  (Intercept)               1993    44.64                                
+          SESSION.L                16623   128.93    0.16                        
+          SESSION.Q                11727   108.29   -0.12 -0.18                  
+          NUMTASKdouble             5603    74.85    0.15  0.09  0.37            
+          SESSION.L:NUMTASKdouble  31043   176.19    0.18  0.21 -0.65 -0.45      
+          SESSION.Q:NUMTASKdouble  36407   190.81   -0.02 -0.22  0.75  0.32 -0.54
+ Residual                         124713   353.15                                
+Number of obs: 24027, groups:  SUBID_S, 72
+
+Fixed effects:
+                        Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)              829.853     13.322   68.749  62.293  < 2e-16 ***
+SESSION.L               -110.984     23.382   46.030  -4.747 2.04e-05 ***
+SESSION.Q                  3.300     22.762   47.340   0.145    0.885    
+NUMTASKdouble            539.050     20.403   53.400  26.421  < 2e-16 ***
+SESSION.L:NUMTASKdouble -308.360     37.002   34.313  -8.334 9.28e-10 ***
+SESSION.Q:NUMTASKdouble    2.269     33.592   49.429   0.068    0.946    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SESSION.L SESSION.Q NUMTAS SESSION.L:
+SESSION.L   -0.011                                      
+SESSION.Q    0.039 -0.008                               
+NUMTASKdobl  0.304 -0.145    -0.047                     
+SESSION.L:N -0.140  0.256    -0.100    -0.497           
+SESSION.Q:N -0.049 -0.108     0.359     0.143 -0.370    

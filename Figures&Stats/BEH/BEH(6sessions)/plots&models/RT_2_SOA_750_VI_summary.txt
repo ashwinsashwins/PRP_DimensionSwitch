@@ -1,0 +1,42 @@
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: RT_2 ~ SESSION * NUMTASK + (1 + SESSION * NUMTASK | SUBID_S)
+   Data: ds_750
+
+REML criterion at convergence: 400880.1
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.3327 -0.4627 -0.1295  0.2280 10.3555 
+
+Random effects:
+ Groups   Name                    Variance Std.Dev. Corr                         
+ SUBID_S  (Intercept)                 0      0.00                                
+          SESSION.L                5291     72.74     NaN                        
+          SESSION.Q                6163     78.51     NaN -0.32                  
+          NUMTASKdouble            2128     46.13     NaN  0.67  0.28            
+          SESSION.L:NUMTASKdouble 19874    140.98     NaN  0.47 -0.60 -0.25      
+          SESSION.Q:NUMTASKdouble 18748    136.92     NaN -0.65  0.63  0.02 -0.82
+ Residual                         68989    262.66                                
+Number of obs: 28650, groups:  SUBID_S, 72
+
+Fixed effects:
+                         Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)              502.1750     7.8316   65.6022  64.122  < 2e-16 ***
+SESSION.L                -38.4880    13.3351   43.1839  -2.886  0.00607 ** 
+SESSION.Q                 -0.8551    13.7904   42.8578  -0.062  0.95085    
+NUMTASKdouble            257.5573    14.8383   51.3100  17.358  < 2e-16 ***
+SESSION.L:NUMTASKdouble -193.7430    25.9468   30.7291  -7.467 2.18e-08 ***
+SESSION.Q:NUMTASKdouble    3.0350    25.4521   44.5066   0.119  0.90562    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SESSION.L SESSION.Q NUMTAS SESSION.L:
+SESSION.L   -0.199                                      
+SESSION.Q   -0.047 -0.138                               
+NUMTASKdobl  0.392 -0.218     0.014                     
+SESSION.L:N -0.212  0.406    -0.148    -0.583           
+SESSION.Q:N  0.015 -0.156     0.379     0.027 -0.416    
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+
