@@ -11,5 +11,5 @@ modelV is decoding variable
 merged means data from all 3 sessions were concatenated for decoding
 balanceV is what cross-validation folds were balanced on. so far, I have run decoding with:
  - NUMTASK
- - modelV (balanced by whatever modelV was
+ - modelV (balanced by whatever modelV was)
  - 'balance' - a newer variable that is each combination of TASKSET_CORSIDE x NUMTASK. 
