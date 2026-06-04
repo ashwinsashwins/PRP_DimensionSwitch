@@ -1,0 +1,38 @@
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: log_rt ~ 1 + SESSION * NUMTASK * mean_probDV + (1 | SUBID_S)
+   Data: ds_250
+
+REML criterion at convergence: 6595.4
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.7082 -0.6870 -0.1203  0.5778  5.8652 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ SUBID_S  (Intercept) 0.02926  0.1711  
+ Residual             0.07371  0.2715  
+Number of obs: 26923, groups:  SUBID_S, 72
+
+Fixed effects:
+                                      Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)                          6.454e+00  3.363e-02  5.303e+02 191.932  < 2e-16 ***
+SESSION.L                           -1.396e-01  5.778e-02  5.137e+02  -2.416  0.01605 *  
+NUMTASKdouble                        4.768e-01  3.209e-02  2.685e+04  14.858  < 2e-16 ***
+mean_probDV                          3.332e-02  5.297e-02  2.685e+04   0.629  0.52935    
+SESSION.L:NUMTASKdouble             -1.503e-01  5.500e-02  2.685e+04  -2.732  0.00629 ** 
+SESSION.L:mean_probDV                5.427e-02  9.058e-02  2.685e+04   0.599  0.54908    
+NUMTASKdouble:mean_probDV           -6.555e-02  6.302e-02  2.685e+04  -1.040  0.29833    
+SESSION.L:NUMTASKdouble:mean_probDV -4.026e-02  1.080e-01  2.685e+04  -0.373  0.70933    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+                   (Intr) SESSION.L NUMTASKd mn_pDV SESSION.L:NUMTASKd SESSION.L:_ NUMTASK:
+SESSION.L          -0.015                                                                  
+NUMTASKdobl        -0.671  0.016                                                           
+mean_probDV        -0.795  0.020     0.833                                                 
+SESSION.L:NUMTASKd  0.016 -0.666    -0.038   -0.020                                        
+SESSION.L:_         0.020 -0.792    -0.021   -0.025  0.831                                 
+NUMTASK:_DV         0.668 -0.016    -0.994   -0.840  0.039              0.021              
+SESSION.L:NUMTASK: -0.016  0.663     0.039    0.021 -0.993             -0.838      -0.040  
