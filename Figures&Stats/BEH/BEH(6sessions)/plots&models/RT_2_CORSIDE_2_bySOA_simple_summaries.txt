@@ -1,0 +1,174 @@
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: log_rt ~ 1 + SESSION * NUMTASK * mean_probDV + (1 | SUBID_S)
+   Data: ds_100
+
+REML criterion at convergence: 4102.3
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.5872 -0.7121 -0.0811  0.6609  5.1777 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ SUBID_S  (Intercept) 0.02248  0.1499  
+ Residual             0.06905  0.2628  
+Number of obs: 22602, groups:  SUBID_S, 72
+
+Fixed effects:
+                                      Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)                          6.698e+00  2.276e-02  1.889e+02 294.220  < 2e-16 ***
+SESSION.L                           -1.252e-01  3.938e-02  1.880e+02  -3.180  0.00172 ** 
+NUMTASKdouble                        4.661e-01  1.718e-02  2.253e+04  27.132  < 2e-16 ***
+mean_probDV                         -3.011e-02  2.749e-02  2.253e+04  -1.095  0.27348    
+SESSION.L:NUMTASKdouble             -1.967e-01  2.963e-02  2.253e+04  -6.638 3.25e-11 ***
+SESSION.L:mean_probDV                2.970e-03  4.765e-02  2.253e+04   0.062  0.95029    
+NUMTASKdouble:mean_probDV            7.569e-04  3.271e-02  2.253e+04   0.023  0.98154    
+SESSION.L:NUMTASKdouble:mean_probDV  4.444e-02  5.657e-02  2.253e+04   0.786  0.43214    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+                   (Intr) SESSION.L NUMTASKd mn_pDV SESSION.L:NUMTASKd SESSION.L:_ NUMTASK:
+SESSION.L          -0.003                                                                  
+NUMTASKdobl        -0.526  0.004                                                           
+mean_probDV        -0.614  0.006     0.812                                                 
+SESSION.L:NUMTASKd  0.004 -0.526    -0.038   -0.008                                        
+SESSION.L:_         0.006 -0.613    -0.008   -0.013  0.813                                 
+NUMTASK:_DV         0.515 -0.005    -0.974   -0.839  0.038              0.011              
+SESSION.L:NUMTASK: -0.005  0.516     0.038    0.011 -0.974             -0.841      -0.041  
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: log_rt ~ 1 + SESSION * NUMTASK * mean_probDV + (1 | SUBID_S)
+   Data: ds_250
+
+REML criterion at convergence: 6593.7
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.7062 -0.6893 -0.1192  0.5787  5.8629 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ SUBID_S  (Intercept) 0.02923  0.1710  
+ Residual             0.07369  0.2715  
+Number of obs: 26923, groups:  SUBID_S, 72
+
+Fixed effects:
+                                      Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)                          6.458e+00  2.447e-02  1.502e+02 263.847  < 2e-16 ***
+SESSION.L                           -1.371e-01  4.221e-02  1.477e+02  -3.248  0.00144 ** 
+NUMTASKdouble                        4.802e-01  1.664e-02  2.685e+04  28.864  < 2e-16 ***
+mean_probDV                          2.626e-02  2.644e-02  2.685e+04   0.993  0.32048    
+SESSION.L:NUMTASKdouble             -1.477e-01  2.851e-02  2.685e+04  -5.183  2.2e-07 ***
+SESSION.L:mean_probDV                4.867e-02  4.517e-02  2.685e+04   1.078  0.28124    
+NUMTASKdouble:mean_probDV           -7.064e-02  3.148e-02  2.685e+04  -2.244  0.02487 *  
+SESSION.L:NUMTASKdouble:mean_probDV -4.444e-02  5.393e-02  2.685e+04  -0.824  0.40987    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+                   (Intr) SESSION.L NUMTASKd mn_pDV SESSION.L:NUMTASKd SESSION.L:_ NUMTASK:
+SESSION.L          -0.006                                                                  
+NUMTASKdobl        -0.473  0.009                                                           
+mean_probDV        -0.554  0.010     0.813                                                 
+SESSION.L:NUMTASKd  0.009 -0.467    -0.034   -0.015                                        
+SESSION.L:_         0.010 -0.549    -0.015   -0.016  0.810                                 
+NUMTASK:_DV         0.464 -0.008    -0.976   -0.838  0.033              0.014              
+SESSION.L:NUMTASK: -0.008  0.458     0.033    0.014 -0.975             -0.835      -0.034  
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: log_rt ~ 1 + SESSION * NUMTASK * mean_probDV + (1 | SUBID_S)
+   Data: ds_500
+
+REML criterion at convergence: 10033.2
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-5.0340 -0.6719 -0.1127  0.5384  5.4694 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ SUBID_S  (Intercept) 0.02959  0.1720  
+ Residual             0.08387  0.2896  
+Number of obs: 26825, groups:  SUBID_S, 72
+
+Fixed effects:
+                                      Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)                          6.246e+00  2.562e-02  1.757e+02 243.800  < 2e-16 ***
+SESSION.L                           -6.120e-02  4.438e-02  1.759e+02  -1.379   0.1696    
+NUMTASKdouble                        4.978e-01  1.843e-02  2.675e+04  27.008  < 2e-16 ***
+mean_probDV                          4.100e-02  2.941e-02  2.675e+04   1.394   0.1633    
+SESSION.L:NUMTASKdouble             -2.528e-01  3.190e-02  2.675e+04  -7.924 2.38e-15 ***
+SESSION.L:mean_probDV               -5.325e-02  5.099e-02  2.675e+04  -1.044   0.2963    
+NUMTASKdouble:mean_probDV           -1.344e-01  3.451e-02  2.675e+04  -3.895 9.86e-05 ***
+SESSION.L:NUMTASKdouble:mean_probDV  1.061e-01  5.976e-02  2.675e+04   1.775   0.0759 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+                   (Intr) SESSION.L NUMTASKd mn_pDV SESSION.L:NUMTASKd SESSION.L:_ NUMTASK:
+SESSION.L          -0.012                                                                  
+NUMTASKdobl        -0.518  0.017                                                           
+mean_probDV        -0.598  0.019     0.828                                                 
+SESSION.L:NUMTASKd  0.017 -0.518    -0.047   -0.026                                        
+SESSION.L:_         0.019 -0.598    -0.026   -0.030  0.829                                 
+NUMTASK:_DV         0.507 -0.016    -0.977   -0.848  0.045              0.025              
+SESSION.L:NUMTASK: -0.016  0.508     0.045    0.025 -0.977             -0.849      -0.046  
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: mean_probDV ~ SESSION * NUMTASK + (1 | SUBID_S)
+   Data: ds_750
+
+REML criterion at convergence: -40620.3
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.2561 -0.6484  0.0171  0.6730  3.4322 
+
+Random effects:
+ Groups   Name        Variance  Std.Dev.
+ SUBID_S  (Intercept) 0.0003829 0.01957 
+ Residual             0.0128623 0.11341 
+Number of obs: 26944, groups:  SUBID_S, 72
+
+Fixed effects:
+                         Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)             5.244e-01  2.636e-03 1.018e+02 198.942   <2e-16 ***
+SESSION.L               2.294e-04  4.559e-03 1.013e+02   0.050   0.9600    
+NUMTASKdouble           3.116e-03  1.522e-03 2.691e+04   2.047   0.0407 *  
+SESSION.L:NUMTASKdouble 2.822e-03  2.628e-03 2.691e+04   1.074   0.2830    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SESSION.L NUMTAS
+SESSION.L   -0.005                 
+NUMTASKdobl -0.405  0.009          
+SESSION.L:N  0.009 -0.402    -0.043
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: mean_probDV ~ SESSION * NUMTASK + (1 | SUBID_S)
+   Data: ds_1000
+
+REML criterion at convergence: -40858.4
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.0764 -0.6526  0.0168  0.6715  3.3649 
+
+Random effects:
+ Groups   Name        Variance  Std.Dev.
+ SUBID_S  (Intercept) 0.0003604 0.01899 
+ Residual             0.0129122 0.11363 
+Number of obs: 27168, groups:  SUBID_S, 72
+
+Fixed effects:
+                         Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)             5.222e-01  2.582e-03 1.047e+02 202.299  < 2e-16 ***
+SESSION.L               1.267e-03  4.463e-03 1.040e+02   0.284    0.777    
+NUMTASKdouble           7.071e-03  1.528e-03 2.714e+04   4.628 3.72e-06 ***
+SESSION.L:NUMTASKdouble 3.201e-03  2.632e-03 2.714e+04   1.216    0.224    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SESSION.L NUMTAS
+SESSION.L   -0.007                 
+NUMTASKdobl -0.418  0.011          
+SESSION.L:N  0.011 -0.416    -0.046
