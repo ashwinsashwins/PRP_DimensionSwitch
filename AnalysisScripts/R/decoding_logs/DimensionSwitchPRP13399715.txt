@@ -1,0 +1,792 @@
+## SLURM PROLOG ###############################################################
+##    Job ID : 13399715
+##  Job Name : DimensionSwitchPRP
+##  Nodelist : node2420
+##      CPUs : 1
+##  Mem/Node : 358400 MB
+## Directory : /oscar/data/dbadre/asrini17/DimensionSwitch_PRP/DataAnalysis/R
+##   Job Started : Thu Oct 16 03:50:06 PM EDT 2025
+###############################################################################
+
+R version 4.2.2 (2022-10-31) -- "Innocent and Trusting"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # DimensionSwitchPRP
+> # peforms basic time-series decoding
+> # NOTE:
+> # =============================================================
+> #Removing evrything from workspace
+> graphics.off()
+> rm(list = ls(all = TRUE))
+> 
+> #Setting up directory
+> fsep<-.Platform$file.sep;
+> Dir_R<-path.expand("/users/asrini17/data/asrini17/R_Helper_Scripts")
+> Dir_BDATA<-path.expand("/users/asrini17/data/asrini17/DimensionSwitch_PRP/DataAnalysis/Matlab/BEH/z_ALLGRAND(EEG,6sessions)")
+> Dir_EDATA<-path.expand("/users/asrini17/data/asrini17/DimensionSwitch_PRP/DataAnalysis/Matlab/EEG")
+> Dir_GRAND<-paste0(Dir_EDATA,"/w_ALLGRAND")
+> 
+> # Load libraries
+> library(data.table)
+> library(tidyverse)
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.2
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::between()     masks data.table::between()
+✖ dplyr::filter()      masks stats::filter()
+✖ dplyr::first()       masks data.table::first()
+✖ lubridate::hour()    masks data.table::hour()
+✖ lubridate::isoweek() masks data.table::isoweek()
+✖ dplyr::lag()         masks stats::lag()
+✖ dplyr::last()        masks data.table::last()
+✖ lubridate::mday()    masks data.table::mday()
+✖ lubridate::minute()  masks data.table::minute()
+✖ lubridate::month()   masks data.table::month()
+✖ lubridate::quarter() masks data.table::quarter()
+✖ lubridate::second()  masks data.table::second()
+✖ purrr::transpose()   masks data.table::transpose()
+✖ lubridate::wday()    masks data.table::wday()
+✖ lubridate::week()    masks data.table::week()
+✖ lubridate::yday()    masks data.table::yday()
+✖ lubridate::year()    masks data.table::year()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+> library(broom)
+> library(rhdf5)
+> library(caret)
+Loading required package: lattice
+
+Attaching package: ‘caret’
+
+The following object is masked from ‘package:purrr’:
+
+    lift
+
+> library(foreach)
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+> library(doMC)
+Loading required package: iterators
+Loading required package: parallel
+> library(binhf)
+Loading required package: wavethresh
+Loading required package: MASS
+
+Attaching package: ‘MASS’
+
+The following object is masked from ‘package:dplyr’:
+
+    select
+
+WaveThresh: R wavelet software, release 4.7.2, installed
+
+Copyright Guy Nason and others 1993-2022
+
+Note: nlevels has been renamed to nlevelsWT
+
+Loading required package: adlift
+Loading required package: EbayesThresh
+
+ **********************************************
+ adlift: a package to perform wavelet lifting schemes
+
+ --- Written by Matt Nunes and Marina Knight ---
+   Current package version:  1.4-6  ( 2025-04-08 ) 
+
+             -+ packaged by MAN +-           
+ **********************************************
+ 
+ adlift 1.4-6 loaded
+
+
+Attaching package: ‘adlift’
+
+The following object is masked from ‘package:EbayesThresh’:
+
+    postmean.cauchy
+
+
+ **********************************************
+ binhf: Haar-Fisz functions for binomial data
+
+ --- Written by Matt Nunes ---
+   Current package version:  1.0-3  ( 2018-07-18 ) 
+
+ 
+ **********************************************
+ 
+ binhf 1.0-3 loaded
+
+
+Attaching package: ‘binhf’
+
+The following object is masked from ‘package:EbayesThresh’:
+
+    negloglik.laplace
+
+The following object is masked from ‘package:data.table’:
+
+    shift
+
+The following object is masked from ‘package:base’:
+
+    norm
+
+> # library(pROC)
+> library(RColorBrewer)
+> library(scales)
+
+Attaching package: ‘scales’
+
+The following object is masked from ‘package:purrr’:
+
+    discard
+
+The following object is masked from ‘package:readr’:
+
+    col_factor
+
+> # library(forcats)
+> library(stringr)
+> 
+> # Source Files
+> setwd(Dir_R)
+> source('basic_theme.R')
+Warning message:
+The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
+ℹ Please use the `linewidth` argument instead. 
+> source('basic_lib.R')
+Loading required package: tictoc
+
+Attaching package: ‘tictoc’
+
+The following object is masked from ‘package:binhf’:
+
+    shift
+
+The following object is masked from ‘package:data.table’:
+
+    shift
+
+> 
+> #Load behavioral data
+> setwd(Dir_BDATA)
+> ds_b<-fread("DimensionSwitchPRP_BehPP.txt") 
+> ds_b[is.nanM(ds_b)]<-NA;
+> 
+> #Analysis Setting
+> setwd(Dir_EDATA)
+> #subs<-list.files( pattern="^A[[:digit:]]{3}");
+> eegV<-"eegpower" #eegraw
+> #modelV<-"CORSIDE_1"
+> modelV<-"S2ID"
+> #sessN<-"nb_S1";#nb = regular decoding, nppr = shuffled label
+> sessN<-"nb_S2";#nb = regular decoding, nppr = shuffled label
+> balanceV<-"NUMTASK"
+> cutV<-NA;# 1288 for HAL2017_BI
+> saveACC<-F;
+> savePRED<-T;
+> saveCM<-F;
+> saveIMP<-F;
+> saveROC<-F;
+> 
+> # Classification Setting
+> #"lda" = linear discriminant analysis
+> #"knn" = k nearest means
+> #"svmRadial" = support vector machine
+> #"nb" = naive bayes
+> #"rf" = random forest
+> #"svmLinear3" = L2 Regularized Support Vector Machine (dual) with Linear Kernel
+> #"pda" = penalized linear discriminant analysis
+> method<-'pda';
+> formula<-as.formula(paste(modelV,' ~ .'))
+> metric<-"Accuracy";
+> control<-trainControl(method="repeatedcv",
++                       number=5,repeats=20,
++                       selectionFunction = "oneSE",
++                       sampling = "down",# rose,smote,down,up: how to balance # of observations for labels
++                       classProbs=TRUE,allowParallel=TRUE,savePredictions=TRUE)
+> 
+> #Feature labels
+> freqL=c("Delta","Theta","Alpha","Beta","Gamma");
+> elecL<-fread(paste0(Dir_R,fsep,"chanlocs_32E_RIKEN.txt"))
+> elecL<-elecL[!Elec %in% c("A1","GND","EOG"),]# A2 was included 
+> varL = expand.grid(elec = as.vector(elecL$Elec),freq = freqL)
+> varL = str_c(varL$freq,"_",varL$elec)
+> 
+> #subid is defined by array in SLURM
+> set.seed(612)
+> s <- paste0('A',Sys.getenv('SLURM_ARRAY_TASK_ID'))
+> t<-1
+> #s<-"A201"
+> 
+> # IN THE LOOP FOR SUBJECT!!
+> 
+> for (s in s){#[subs %in% c("A230")]
++   # STEP 1: Merging data~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   # Load EEG data via HDF5 file
++   s2 <- sub("[0-9]", "3", s)
++   s3 <- sub("[0-9]", "6", s)
++   sessions <- c(s, s2,s3)
++   bl_list <- vector("list",3)
++   eeg_list <- vector("list",3)
++   
++   #Trying by loading in all EEG data and then running prep
++   for (s in sessions){ # just loading in EEG data in this loop
++       Dir_Data_i<-paste0(Dir_EDATA,fsep,s,fsep,"DATASETS") #sets directory for specified SUBID. copy this line for linked subids?
++       #print(Dir_Data_i)
++       setwd(Dir_Data_i);H5close();
++       if (grepl(".S2$",sessN)){dataF<-"*FFB_STIM2LK.h5"}else{dataF<-'*FFB_STIM1LK.h5'}
++       #if (grepl(".S2$",sessN)){dataF<-"*FFB_RESP2LK.h5"}else{dataF<-'*FFB_RESP1LK.h5'}
++       
++       f2load<-list.files(path=Dir_Data_i,pattern=dataF,full.names=TRUE)
++       ds_eeg<-h5read(f2load,eegV);#ds_info<-h5ls(f2load);
++       btIDX<-data.table(h5read(f2load ,"IDX"))%>%dplyr::rename(BLOCK=V1,TRIAL=V2);
++     
++     # Get Individual data to match to EEG data (this will reflect EEG artifact rejection)
++     # ds_bl is typically smaller than original ds_b because btIDX reflects AR...
++      subN<-as.numeric(gsub("A","",s));# Filter data and keep indexes
++      ds_bl<-merge(btIDX,ds_b[SUBID_S==subN],by=c('BLOCK','TRIAL')) # use unique ID 
++     
++      id <- match(s,sessions)
++      #print(dim(ds_eeg))
++      bl_list[[id]] <- ds_bl
++      eeg_list[[id]] <- ds_eeg
++ }    
++   #bind lists together
++   ds_bl  <- data.table::rbindlist(bl_list, use.names = TRUE, fill = TRUE)
++   ds_eeg <- abind::abind(eeg_list, along = 1) # merge along trials dimension
++   
++   # Applies 1) filtering, 2) cutting, 3) balancing, and 4) factorization
++     prepSet <- list(
++       #filtIDX =! is.na(ds_bl[[modelV]]) & ds_bl$RESPORDER_K==1 & ds_bl$RESPOMIT==0 & ds_bl$RT_1 < ds_bl$cutRT1 & ds_bl$RT_2 < ds_bl$cutRT2,
++       filtIDX =! is.na(ds_bl[[modelV]]) & ds_bl$RESPORDER_K==1 & ds_bl$RESPOMIT==0 & ds_bl$RT_1 < ds_bl$cutRT1 & ds_bl$RT_2 < ds_bl$cutRT2 & ds_bl$ACC_1==1 & ds_bl$ACC_2==1,
++       #filtIDX =! is.na(ds_bl[[modelV]]) & ds_bl$RESPORDER_K==1 & ds_bl$RESPOMIT==0 & ds_bl$RT_1 < ds_bl$cutRT1 & ds_bl$RT_2 < ds_bl$cutRT2 & ds_bl$ACC_1==1 & ds_bl$ACC_2==1 & ds_bl$NUMTASK=="double",
++       #filtIDX =! is.na(ds_bl[[modelV]]) & ds_bl$ACC_1==1 & ds_bl$ACC_2==1 ,
++       modelV = modelV, balanceV = balanceV, cutV = cutV, controlL=control)
++     
++     g(ds_bl, ds_eeg, filtIDX, foldsL) %=% preprop_decode(ds_bl,ds_eeg,prepSet)
++     print(sprintf("SUBID: %s DATA size: %d",s, dim(ds_bl)[1]))
++   
++ #  bl_list <- vector("list",3)
++ #  eeg_list <- vector("list",3)
++ #  trial_map <- vector("numeric", 3)
++   
++ #  for (s in sessions){
++ #  Dir_Data_i<-paste0(Dir_EDATA,fsep,s,fsep,"DATASETS") #sets directory for specified SUBID. copy this line for linked subids?
++ #  print(Dir_Data_i)
++ #  setwd(Dir_Data_i);H5close();
++ #  if (grepl(".S2$",sessN)){dataF<-"*FFB_STIM2LK.h5"}else{dataF<-'*FFB_STIM1LK.h5'}
++ #  #if (grepl(".S2$",sessN)){dataF<-"*FFB_RESP2LK.h5"}else{dataF<-'*FFB_RESP1LK.h5'}
++ #  
++ #  f2load<-list.files(path=Dir_Data_i,pattern=dataF,full.names=TRUE)
++ #  ds_eeg<-h5read(f2load,eegV);#ds_info<-h5ls(f2load);
++ #  btIDX<-data.table(h5read(f2load ,"IDX"))%>%dplyr::rename(BLOCK=V1,TRIAL=V2);
++ #  
++ #  # Get Individual data to match to EEG data (this will reflect EEG artifact rejection)
++ #  # ds_bl is typically smaller than original ds_b because btIDX reflects AR...
++ #  subN<-as.numeric(gsub("A","",s));# Filter data and keep indexes
++ #  ds_bl<-merge(btIDX,ds_b[SUBID_S==subN],by=c('BLOCK','TRIAL')) # use unique ID 
++ #  
++ #  # Applies 1) filtering, 2) cutting, 3) balancing, and 4) factorization
++ #  prepSet <- list(
++ #    #filtIDX =! is.na(ds_bl[[modelV]]) & ds_bl$RESPORDER_K==1 & ds_bl$RESPOMIT==0 & ds_bl$RT_1 < ds_bl$cutRT1 & ds_bl$RT_2 < ds_bl$cutRT2,
++ #    filtIDX =! is.na(ds_bl[[modelV]]) & ds_bl$RESPORDER_K==1 & ds_bl$RESPOMIT==0 & ds_bl$RT_1 < ds_bl$cutRT1 & ds_bl$RT_2 < ds_bl$cutRT2 & ds_bl$ACC_1==1 & ds_bl$ACC_2==1,
++ #    #filtIDX =! is.na(ds_bl[[modelV]]) & ds_bl$RESPORDER_K==1 & ds_bl$RESPOMIT==0 & ds_bl$RT_1 < ds_bl$cutRT1 & ds_bl$RT_2 < ds_bl$cutRT2 & ds_bl$ACC_1==1 & ds_bl$ACC_2==1 & ds_bl$NUMTASK=="double",
++ #    #filtIDX =! is.na(ds_bl[[modelV]]) & ds_bl$ACC_1==1 & ds_bl$ACC_2==1 ,
++ #    modelV = modelV, balanceV = balanceV, cutV = cutV, controlL=control)
++ #  
++ #  g(ds_bl, ds_eeg, filtIDX, foldsL) %=% preprop_decode(ds_bl,ds_eeg,prepSet)
++ #  print(sprintf("SUBID: %s DATA size: %d",s, dim(ds_bl)[1]))
++ # 
++ #  id <- match(s,sessions)
++ #  print(dim(ds_eeg))
++ #  bl_list[[id]] <- ds_bl
++ #  eeg_list[[id]] <- ds_eeg
++ #  trial_map[id] <- dim(ds_bl)[1]
++ #  }
++ #  ds_bl  <- data.table::rbindlist(bl_list, use.names = TRUE, fill = TRUE)
++ #  ds_eeg <- abind::abind(eeg_list, along = 1) # merge along trials dimension
++ #  subid_s_col <- rep(sessions, times = trial_map) #this will be used later to map trials back onto decoding results
++ #  subid_s_col <- as.numeric(str_extract(subid_s_col, "\\d+"))
++   
++   # STEP (2):Aggregation~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   
++   
++   # STEP 2: Classification~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   registerDoMC(8);
++   ptm<- proc.time();
++   dimS <- dim(ds_eeg)
++   dimL <- str_split(h5readAttributes(f2load,"/")$dim_label,"_") %>% unlist()
++   timeIDX <- 1:dimS[str_detect(dimL,"time")]
++   elecIDX <- 1:dimS[str_detect(dimL,"chan")]
++   if (any(dimL=="freq")){freqIDX <- 1:dimS[str_detect(dimL,"freq")]}
++   #sprintf("Classification starts!! Retained data are:")
++   print(sprintf(paste0(dimL,"= %d"),dimS))
++   
++ 
++   results<-
++     foreach(t=timeIDX) %dopar% {
++       #Get data of one point!
++       if (eegV=="eegraw"){d<-ds_eeg[,t,elecIDX]} # index by dim?
++       if (eegV=="eegpower"){d<-ds_eeg[,t,freqIDX,elecIDX];}
++       dim(d)<-c(dim(d)[1],prod(dim(d)[2:3],na.rm=T))#adjust dimensions !
++       
++       #Assigne label
++       C <- ds_bl[[modelV]];if(grepl("nppr",sessN)){C<-sample(C)} 
++       d<-data.table(C=C,data.table(d));#make sure to data.table(d) before appending!
++       setnames(d,"C",modelV)
++       
++       #Run classification
++       if (!is_empty(foldsL)){control[["index"]]<-foldsL}
++       if(is_empty(foldsL)){control[['index']] <-NULL}
++       m<-train(formula, data=d, method=method, metric=metric, trControl=control);
++       print("trained!")
++       
++       # #Get all results
++       r <- summary_decode(m,varL,list(PRED=T,CM=saveCM,IMP=saveIMP,ROC=saveROC))
++       r <- r[sapply(r, function(x) dim(x)[1]) > 0];# remove empty slots
++       r_f <- lapply(r, cbind,SUBID=unique(ds_bl$SUBID),SUBID_S=ds_bl$SUBID_S,time=timeIDX[t])# don't lapply r_f repeatedly
++       r_f$r_prob <- r_f$r_prob %>% mutate(BLOCK=ds_bl$BLOCK,TRIAL=ds_bl$TRIAL) # should be safe!
++ 
++       return(r_f)
++     }
++   proc.time() - ptm
++   
++   # Summarize all results
++   rALL<-as.list(as.data.frame(do.call(rbind, results)))
++   
++   # Result 1:Overall accuracy
++   r_accG<-rbindlist(rALL$r_acc);
++   if (saveACC){saveRDS(r_accG,paste0(s,"_",modelV,"_",sessN,"_accG.rds"))}
++   
++   # Result 2:Single-trial accuracy and confidence
++   # Both acc and prob would be 0~1 since its cross-validated!
++   r_pred<-rbindlist(rALL$r_prob) %>% dplyr::select(-rowIndex);
++   if (savePRED){saveRDS(r_pred,paste0(s,"_merged_",modelV,"_",sessN,"_pred.rds"))}
++   
++   # Result 3:Confusion matrix
++   r_cm<-rbindlist(rALL$r_cm)
++   if (saveCM){saveRDS(r_cm,paste0(s,"_",modelV,"_",sessN,"_cm.rds"))}
++   
++   # Result 4:Importance map
++   r_imp<-rbindlist(rALL$r_imp)
++   if (saveIMP){saveRDS(r_imp,paste0(s,"_",modelV,"_",sessN,"_cm.rds"))}
++   
++   # STEP 3: Quickly plotting?~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   # Plot related setting (for quick check!)
++   theme_set(theme_bw(base_size = 20))#32/28
++   CSCALE_YlOrRd = rev(brewer.pal(9,"YlOrRd"));
++   chance<-1/length(unique(ds_bl[[modelV]]))
++   
++   # Overall Accuracy
++   #quartz(width=7.5,height=4.5);theme_set(theme_bw(base_size = 20))#32/28
++   p<-ggplot(data=r_accG,aes(x=time,y=Accuracy,ymin=Accuracy-AccuracySD,ymax=Accuracy+AccuracySD)) +
++           geom_vline(xintercept=c(126),linetype=1,size=1)+annotate("text",x=150, y=chance-0.05,label="Stimulus + Cue")+
++           geom_hline(yintercept=chance,linetype=1,size=1)+
++           geom_ribbon(alpha=0.2,linetype=0,fill="red")+#
++           ggtitle(s)+
++           geom_line(size=1.5,color="red")
++   
++ 
++ 
++ print(dim(r_pred))
++ 
++   # Accuracy by task condition
++   r_predG <- r_pred %>%
++     left_join(ds_bl %>% dplyr::select( SUBID_S,BLOCK, TRIAL, NUMTASK),# pick variable of choice
++                 by = c("SUBID_S","BLOCK", "TRIAL"))
++                 
++                 
++   print(sum(is.na(r_predG$NUMTASK)))
++   print(dim(r_predG))
++   print(table(r_predG$NUMTASK))             
++  
++  # r_predG <- r_predG %>%
++  #   group_by(SUBID_S,BLOCK,TRIAL) %>%
++  #   summarise(mean_acc = mean(acc),
++  #             sd_acc = sd(acc))
++   
++    r_predG <- r_predG %>%
++       group_by(NUMTASK, time) %>%
++       summarise(mean_acc = mean(acc),
++                 sd_acc = sd(acc))
++ 
++   print(dim(r_predG))
++   print(table(r_predG$NUMTASK))
++   p2<-ggplot(data=r_predG,aes(x=time,y=mean_acc, group = NUMTASK)) + #ymin=mean_acc-sd_acc,ymax=mean_acc+sd_acc, 
++     geom_vline(xintercept=c(126),linetype=1,size=1)+annotate("text",x=150, y=chance-0.05,label="Stimulus + Cue")+
++     geom_hline(yintercept=chance,linetype=1,size=1)+
++     #geom_ribbon(alpha=0.2,linetype=0, aes(fill=NUMTASK))+
++     ggtitle(s)+
++     geom_line(size=1.5,aes(color=NUMTASK, linetype = NUMTASK))
++   
++   # Save figure
++   
++ 
++   outfile <- file.path(Dir_EDATA, paste0(s, "_merged_",modelV, "_", sessN, ".png"))
++   
++   png(outfile, width = 6.5, height = 5, units = "in", res = 300)
++   print(p2)
++   dev.off()
++   
++   message("Saved plot to: ", outfile)
++   #ggsave(filename = file.path(Dir_EDATA, paste0(s,"_",modelV,"_",sessN,".png")), plot = p, width = 6.5, height = 5)
++ }
+   NUMTASK     M    Mp
+    <char> <int> <num>
+1:  double  3776  3020
+2:  single  1655  1324
+[1] "Data set is balanced by NUMTASK variable...!!"
+[1] "Each fold contains 2648 trials: 1324 trials per balance factor "
+[1] "SUBID: A617 DATA size: 5431"
+[1] "rpt= 5431" "time= 301" "freq= 5"   "chan= 31" 
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] "trained!"
+[1] 1634731      22
+[1] 0
+[1] 1634731      23
+
+ double  single 
+1136576  498155 
+`summarise()` has grouped output by 'NUMTASK'. You can override using the
+`.groups` argument.
+[1] 602   4
+
+double single 
+   301    301 
+Saved plot to: /users/asrini17/data/asrini17/DimensionSwitch_PRP/DataAnalysis/Matlab/EEG/A617_merged_S2ID_nb_S2.png
+Warning message:
+Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead. 
+> 
+> 
+> # Send email to me 
+> # notifyM(paste0("HAL2017_",date()))
+> 

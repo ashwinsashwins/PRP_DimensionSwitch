@@ -1,0 +1,88 @@
+---
+title: "Ashwin PRP Analysis"
+output: html_notebook
+---
+
+
+#Setup
+
+```{r}
+#clear environment
+graphics.off()
+rm(list = ls(all = TRUE))
+
+#Setting up directories
+fsep<-.Platform$file.sep;
+Dir_Support <- path.expand("~/Brown Dropbox/Ashwin Srinivasan/R_support_scripts") 
+Dir_Experiment <- path.expand("~/Brown Dropbox/Ashwin Srinivasan/DimensionSwitch_PRP")
+Dir_BDATA<-path.expand("DataAnalysis/Matlab/BEH")
+
+
+#load libraries
+library(data.table)
+library(tidyverse)
+library(ggplot2)
+
+```
+
+
+```{r}
+#load data
+setwd(Dir_Experiment)
+setwd(Dir_BDATA)
+df <- fread('z/ALLGRAND(EEG,6sessions)/DimensionSwitchPRP_BehP.txt', header=TRUE, fill=TRUE) 
+
+```
+
+Central Q:How does learning shape the geometry and dynamics of task representations during control-demanding behavior? How does separability of task representations relate to the reduction of multitasking costs via training?
+
+Behavioral Qs
+- what evidence of learning can we see from the behavioral data? RT, accuracy, etc.
+- can we see any evidence of mitigating multitask costs?
+- do our behavioral data provide evidence for 1 mulitasking account over the others? (central bottleneck, scheduling)
+
+Data-tied hypotheses (answer the above questions in terms of specific data analyses):
+- Accuracy for both items should increase across time
+- RT for both items should decrease across time.
+  - RT for item 2 should show a more pronounced decrease
+- think about feature/dimension switches!
+
+
+How do we test these hypotheses with the data we have?:
+
+```{r}
+#Clean and Recode Data
+
+taskLabels <- c("Low-High", "Odd-Even", "Red-Blue", "Bold-Faint")
+stimNumbers <- c("3", "4", "6", "7")
+stimColor <- c("red", "red-faint", "blue-faint", "blue")
+
+df[,SOA:= factor(SOA, labels = c("100ms","250ms", "500ms", "750ms", "1000ms"))]
+df[,TASKSET_1:= factor(TASKSET_1, labels = taskLabels)]
+df[,TASKSET_2:= factor(TASKSET_2, labels = taskLabels)]
+df[,STIMPOS_1:= factor(STIMPOS_1, labels = c("Top", "Bottom"))]
+df[,STIMPOS_2:= factor(STIMPOS_2, labels = c("Top", "Bottom"))]
+df[,FDIM_1:= factor(FDIM_1, labels = c("Number", "Color"))]
+df[,FDIM_2:= factor(FDIM_2, labels = c("Number", "Bottom"))]
+
+df[,F_NUMBER_1:= factor(F_NUMBER_1, labels = stimNumbers)]
+df[,F_NUMBER_2:= factor(F_NUMBER_2, labels = stimNumbers)]
+df[,S1_1:= factor(S1_1, labels = stimNumbers)]
+df[,S2_1:= factor(S2_1, labels = stimNumbers)]
+
+df[,F_COLOR_1:= factor(F_COLOR_1, labels = stimColor)]
+df[,F_COLOR_2:= factor(F_COLOR_2, labels = stimColor)]
+df[,S1_2:= factor(S1_2, labels = stimColor)]
+df[,S2_2:= factor(S2_2, labels = stimColor)]
+
+df[,NUMTASK:= factor(NUMTASK, labels = c("single","double"))]
+
+df$SUBID_S <- df$SUBID
+df <- transform(df, SUBID = paste0("1",substr(SUBID, 2, 3)))
+df[,EXACT_REP:= factor(EXACT_SW, labels = c("exact","diff"))]
+
+df$S1IDc <- paste(df$S1_1, df$S1_2, sep = "_" )
+df$S2IDc <- paste(df$S2_1, df$S2_2, sep = "_" )
+
+```
+
